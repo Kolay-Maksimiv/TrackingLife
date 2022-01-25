@@ -6,9 +6,9 @@ import { tap } from 'rxjs/operators';
 import { LoginModel } from 'app/models/auth/login-model';
 import { User } from 'app/models/auth/user.model';
 import { RegistrationModel } from 'app/models/auth/registration.model';
+import { JwtHelper } from 'app/helper/jwtHelper';
 import { HttpClientService } from 'app/shared/http-client/http-client.service';
 import { environment } from 'environments/environment';
-import { JwtHelper } from 'app/helper/jwtHelper';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -186,6 +186,7 @@ export class AuthService {
     currentUser.roles = decoded['role'];
     return currentUser;
   }
+
   public resetPassword(model): Observable<any> {
 
     this.myHeaders = new HttpHeaders().set("Content-Type", "application/json;");
@@ -195,4 +196,5 @@ export class AuthService {
     return this.http.post(HttpClientService.ACCOUNTS_PASSWORD,
       { ...model, callbackUrl: environment.webUrl }, { headers: this.myHeaders });
   }
+
 }

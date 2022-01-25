@@ -12,13 +12,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Main Component
 import { AppComponent }                    from './app.component';
-// import { HeaderComponent }                 from './components/header/header.component';
+import { HeaderComponent }                 from './components/header/header.component';
 import { SidebarComponent }                from './components/sidebar/sidebar.component';
 import { SidebarRightComponent }           from './components/sidebar-right/sidebar-right.component';
 import { TopMenuComponent }                from './components/top-menu/top-menu.component';
-// import { FooterComponent }                 from './components/footer/footer.component';
+import { FooterComponent }                 from './components/footer/footer.component';
 import { PanelComponent }                  from './components/panel/panel.component';
-// import { FloatSubMenuComponent }           from './components/float-sub-menu/float-sub-menu.component';
+import { FloatSubMenuComponent }           from './components/float-sub-menu/float-sub-menu.component';
 
 
 // Component Module
@@ -56,10 +56,11 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ToastComponent } from './components/general/toast/toast.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { UserCreateComponent } from './components/user-management/user-create/user-create.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+
 import { AuthInterceptor } from './auth/auth-interceptor';
 export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locate/','.json'); 
@@ -68,22 +69,21 @@ export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
 @NgModule({
   declarations: [
     AppComponent,
-    // HeaderComponent,
+    HeaderComponent,
     SidebarComponent,
     SidebarRightComponent,
     TopMenuComponent,
-    // FooterComponent,
+    FooterComponent,
     PanelComponent,
-    // FloatSubMenuComponent,
-    // CropImageComponent,
+    FloatSubMenuComponent,
 
     // added components
     LoginComponent,
     PageNotFoundComponent,
     RegistrationComponent,
+    ToastComponent,
     SafeHtmlPipe,
     ResetPasswordComponent,
-    UserCreateComponent,
     ForgotPasswordComponent,
   ],
   imports: [
