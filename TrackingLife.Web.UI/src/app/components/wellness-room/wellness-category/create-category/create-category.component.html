@@ -1,0 +1,42 @@
+<div class="create-container panel panel-default panel-body">
+  <div class="text-center">
+    <div class="head-edit"> Create Category</div>
+  </div>
+  <div class="row" style="padding: 25px 25px 0px 25px;">
+    <div class="col-md-12">
+      <form [formGroup]="form" #f="ngForm">
+
+        <div class="form-group">
+          <label for=title class="title-edit ">Title <span class="text-danger">*</span></label>
+          <input id="title" type="text" class="form-control" formControlName="title" required />
+          <div *ngIf="(form.controls.title.invalid 
+                  && (form.controls.title.dirty || form.controls.title.touched) 
+                  && form.controls.title.errors != null 
+                  && form.controls.title.errors.required)" class="text-danger"
+            style="padding-top:10px">
+            Title is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for=title class="title-edit ">Banner Image </label>
+          <div style="width: 300px;">
+            <app-crop-image-category (croppedImage)="croppedCover($event)" (uploadImage)="uploadCover($event)"></app-crop-image-category>
+          </div>
+        </div>  
+          <div class="form-group">
+            <div class="create-buttons row footer-edit">
+              <div class="col-md-3 col-sm-12 btn-container">
+                <button class="btn btn-block btn-lg btn-cancel" (click)="closeButton()">Cancel</button>
+              </div>
+              <div class="col-md-3 col-sm-12 btn-container">
+                <button class="btn btn-edit  btn-block btn-lg "  (click)="createCategory()">Save</button>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="this.showLoader" id="page-loader" class="fade show" style="opacity: 0.5;"><span class="spinner"></span>
+</div>

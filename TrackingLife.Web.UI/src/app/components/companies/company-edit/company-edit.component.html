@@ -1,0 +1,74 @@
+<div class="create-container panel panel-default panel-body">
+    <div class="text-center"><h3> Create Company</h3></div>
+    <div class="row">
+        <div class="col-md-12">
+                <div class="form-group">
+                    <label for=name>Name <span class="text-danger">*</span></label>
+                    <input id="name"
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="company.name"
+                            name="name"
+                            required/>
+                </div>
+                <div class="form-group">
+                    <label for=uniqueCode>Code <span class="text-danger">*</span></label>
+                    <input id="uniqueCode"
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="company.uniqueCode"
+                            name="uniqueCode"
+                            required/>
+                </div>
+                <div class="form-group">
+                  <div class="checkbox-css">
+                    <label for="sentNotification">Sent notification </label>
+                    <input style="margin-left: 10px;"
+                          id="sentNotification"
+                           name="sentNotification"
+                           type="checkbox"
+                           [(ngModel)]="company.sentNotification"
+                           [ngModelOptions]="{standalone: true}" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="checkbox-css">
+                    <label for="allowComments">Allow comments </label>
+                    <input style="margin-left: 10px;"
+                          id="allowComments"
+                           name="allowComments"
+                           type="checkbox"
+                           [(ngModel)]="company.allowComments"
+                           [ngModelOptions]="{standalone: true}" />
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <div class="checkbox-css">
+                    <label for="allowEmojis">Allow emojis</label>
+                    <input style="margin-left: 10px;"
+                          id="allowEmojis"
+                           name="allowEmojis"
+                           type="checkbox"
+                           [(ngModel)]="company.allowEmojis"
+                           [ngModelOptions]="{standalone: true}" />
+                  </div>
+
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+              <div class="pull-right" style="padding-left: 10px;">
+                <button class="btn btn-primary btn-block btn-lg" (click)="saveButtonClick()">Save</button>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-default btn-block btn-lg" (click)="cancelButton()">Cancel</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,75 @@
+.panel-title-dashboard {
+    font-size:15px;
+    padding-left: 10px;
+}
+.page-header {
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.chart-area-container {
+    height: 200px; 
+    display: grid;
+}
+.chart-container {
+    height: 300px; 
+    display: grid;
+}
+.section-header {
+    padding: 20px 20px 20px 10px;
+    border: 1px solid #d9e0e7;
+    border-left: 0px;
+    border-right: 0px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.section-left {
+    border: 1px solid #d9e0e7;
+    border-left: 0px;
+    border-bottom: 0px;
+    padding: 20px
+}
+.section-right {
+    border: 1px solid #d9e0e7;
+    border-right: 0px;
+    padding: 20px;
+}
+.section-center {
+    border: 1px solid #d9e0e7;
+    padding: 20px
+}
+.chart-header {
+    font-size: 23px;
+    font-weight:bolder;
+}
+.periods-data {
+    font-size:18px;
+    color: rgb(136, 130, 130);
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.quantity {
+    font-size: 50px;
+    color: #A8879F;
+    font-weight: 600;
+}
+.total-page {
+    font-size:18px;
+    color: rgb(136, 130, 130);
+    margin-top: 2px;
+    margin-bottom: 2px
+}
+
+.negative {
+    color: #EE4B46;
+}
+
+.positive {
+    color: #97CE8B;
+}
+.ngx-charts {
+    width: 68%;
+}
+.chart-legend .legend-labels {
+    width: 150px !important;
+}

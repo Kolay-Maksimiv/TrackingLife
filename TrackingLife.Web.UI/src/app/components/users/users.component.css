@@ -1,0 +1,91 @@
+td {
+    vertical-align: middle !important;
+}
+th {
+    vertical-align: middle !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px  !important;
+}
+
+tbody {
+    margin-top: 20000px !important;
+}
+
+.m-b-7 {
+    margin-bottom: 7px !important;
+}
+.custom-btn {
+    width: 120px !important;
+    height: 40px !important;
+    font-size: 16px !important;
+    border-radius: 10px !important;
+}
+
+.activeUser {
+    border-bottom: 3px solid #74CABF;
+    font-weight: 600;
+}
+
+.edit-btn {
+    background: #74CABF !important;
+    color: #fff !important;
+}
+
+.archive-btn {
+    background: #fff !important;
+    border: 1px solid #74CABF !important;
+    color: #74CABF !important;
+}
+
+.pointer {
+    cursor: pointer !important;
+}
+
+.get-user-button {
+    justify-content: flex-end !important;
+    font-size: 16px !important;
+}
+
+.table-head {
+    font-size: 15px !important;
+    border-top: 1px solid #C4C4C4 !important; 
+    border-bottom: 1px solid #C4C4C4 !important;
+}
+
+.p-t-13 {
+    padding-top: 10px !important;
+}
+
+.avatar-block {
+    padding: 13px 16px !important;
+}
+
+.profile-id {
+    background: #fafafa !important;
+}
+
+.tr-custom-style {
+    background: #fff !important;
+    border-bottom: 5px solid #fafafa !important;
+}
+.panel-title-users {
+    font-size:15px !important;
+}
+
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #97CE8B;
+    background-color: #ffffff;
+    border:  2px solid #97CE8B;
+}
+
+.pagination .page-item+.page-item {
+    margin-left: 10px;
+}
+
+.page-arrow {
+    color: #97CE8B !important;
+    background-color: #ffffff !important;
+    border:  2px solid #97CE8B !important;
+}

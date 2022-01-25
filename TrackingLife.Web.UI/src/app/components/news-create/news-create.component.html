@@ -1,0 +1,137 @@
+<div class="create-container panel panel-default panel-body">
+  <div class="text-center">
+    <div class="head-edit"> Create News</div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger" *ngIf="error">
+        <p> {{error}} </p>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding: 25px 25px 0px 25px;">
+    <div class="col-md-12">
+      <form [formGroup]="form" #f="ngForm">
+
+        <div class="form-group">
+          <label for=title class="title-edit ">Title <span class="text-danger">*</span></label>
+          <input id="title" type="text" class="form-control" formControlName="title" required />
+          <div *ngIf="(form.controls.title.invalid 
+                && (form.controls.title.dirty || form.controls.title.touched) 
+                && form.controls.title.errors != null 
+                && form.controls.title.errors.required) || !isValidMsgTitle" class="text-danger"
+            style="padding-top:10px">
+            Title is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for=title class="title-edit " >Banner Image </label>
+          <app-crop-image (croppedImage)="croppedCover($event)" (uploadImage)="uploadCover($event)"></app-crop-image>
+
+        </div>
+
+        <div class="form-group">
+          <label for=contentHtml class="title-edit">Text <span class="text-danger">*</span></label>
+          <div *ngIf="(form.controls.contentHtml.invalid 
+            && (form.controls.contentHtml.dirty || form.controls.contentHtml.touched) 
+            && form.controls.contentHtml.errors != null 
+            && form.controls.contentHtml.errors.required) || !isValidMsgText" class="text-danger"
+            style="padding-bottom:5px;">
+            Text is required
+          </div>
+          <div>
+            <editor [init]="editorOptions" id="contentHtml" formControlName="contentHtml" name="contentHtml"
+      (ngModelChange)="changeActiveEditor('contentHtml')">
+      >
+    </editor>
+          </div>
+        </div>
+        <div class="form-group row m-b-15">
+          <label class="col-form-label col-md-12" class="title-create">Categories <span class="text-danger">*</span></label>
+          <div class="col-md-12">
+              <ng-multiselect-dropdown 
+              class="multiselect-dropdown-list"
+              [placeholder]="'Select Categories'"
+              [data]="dropdownList"
+              [(ngModel)]="selectedItems"
+              [ngModelOptions]="{standalone: true}"
+              [settings]="dropdownSettings"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+          <div *ngIf="this.categoriesValid == false" class="col-md-12 text-danger">
+              Categories is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox-css">
+            <label for="sendNotification">Send notification </label>
+            <input style="margin-left: 10px;" id="sendNotification" formControlName="sendNotification"
+              type="checkbox" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="checkbox-css">
+            <label for="publish" >Publish </label>
+            <input style="margin-left: 10px;" id="publish"  name="publish" type="checkbox" [(ngModel)]="isPublish"
+            (change)="isPublishedSelected($event)"  [ngModelOptions]="{standalone: true}" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="create-buttons row footer-edit">
+      <div class="col-md-3 col-sm-12 btn-container">
+        <button class="btn btn-block btn-lg btn-cancel" (click)="closeButton()">Cancel</button>
+      </div>
+      <div class="col-md-3 col-sm-12 btn-container">
+        <button class="btn btn-edit  btn-block btn-lg " (click)="createNews()">Save</button>
+      </div>
+      <div class="col-md-3 col-sm-12 btn-container" >
+        <button class="btn btn-edit btn-block btn-lg btn-create" (click)="saveAndPreview(modalDialog)">Save and Preview</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div *ngIf="this.showLoader" id="page-loader" class="fade show" style="opacity: 0.5;"><span class="spinner"></span>
+</div>
+
+<ng-template #modalDialog let-c="close" let-d="dismiss">
+  <div class="modal-header">
+
+    <a type="button" class="close" style="cursor: pointer;" (click)="d('Cross click')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    </svg>
+  </a>
+  <img src="https://queallyprod.blob.core.windows.net/media/queally_logo_mini.png" style="margin-right: 400px;"/>
+  </div>
+  <div class="modal-body" style="overflow: overlay;">
+    <app-news-preview  [news]="news"></app-news-preview>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-white" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+
+<!-- <ng-template #modalDialog let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">News preview</h4>
+    <a type="button" class="close" (click)="d('Cross click')">×</a>
+  </div>
+  <div class="modal-body">
+    <p>
+      <iframe width="100%" height="750px" frameBorder="0" [src]="urlSafe"></iframe>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-white" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template> -->

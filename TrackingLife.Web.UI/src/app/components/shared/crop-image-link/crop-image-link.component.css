@@ -1,0 +1,12 @@
+.btn-image { 
+    background-color: #97ce8b;
+    border: none;
+    color: white;
+    padding: 5px 25px;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}

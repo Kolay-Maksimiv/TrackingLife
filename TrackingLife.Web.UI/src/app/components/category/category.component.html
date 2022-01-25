@@ -1,0 +1,47 @@
+    <!-- begin panel -->
+    <span *ngIf="isLoading" class="spinner-small"></span>
+		<panel>
+			<ng-container header>
+				<h4 class="panel-title">Categories <span class="label label-success m-l-5 t-minus-1" (click)="createCategoryRedirect()" style="cursor: pointer;">NEW</span></h4>
+			</ng-container>
+      <div class="row">
+        <div class="col-md-4">
+          <input class="form-control" placeholder="Search by name..." [formControl]="searchByName"/>
+        </div>
+      </div>
+      <!-- begin table-responsive -->
+      <div class="table-responsive" *ngIf='categories'>
+        <table class="table table-striped m-b-0">
+          <thead>
+            <tr>
+              <th (click)="sortItems('id')" style="cursor: pointer;"> 
+                <span>#</span>
+                <i *ngIf="orderBy === 1" class="sort-by-asc" aria-hidden="true"></i>
+                <i *ngIf="orderBy === 2" class="sort-by-desc" aria-hidden="true"></i>
+              </th>
+              <th (click)="sortItems('name')" style="cursor: pointer;">Name
+                <i *ngIf="orderBy === 3" class="sort-by-asc" aria-hidden="true"></i>
+                <i *ngIf="orderBy === 4" class="sort-by-desc" aria-hidden="true"></i>
+              </th>
+              <th width="1%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let category of categories'>
+              <td>{{ category.id }}</td>
+              <td>{{ category.name }}</td>
+              <td class="with-btn" nowrap>
+                <a [routerLinkActive]="['link-active']" [routerLink]="['edit', category.id]" class="btn btn-sm btn-primary width-60 m-r-2">Edit</a>
+                <a class="btn btn-sm btn-white width-60" (click)="deleteCategory(category)">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-container footer>
+          <hr/>
+        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="length" [pageSize]="itemsPerPage" [(page)]="page" [maxSize]="5" [rotate]="false" (pageChange)="loadPage($event)" [boundaryLinks]="true"></ngb-pagination> 
+      </ng-container>
+      </div>
+      <!-- end table-responsive -->
+		</panel>
+		<!-- end panel -->

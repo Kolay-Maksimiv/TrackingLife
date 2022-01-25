@@ -1,0 +1,15 @@
+<image-cropper [imageChangedEvent]="imageChangedEvent"
+    [roundCropper]="roundCropper" [format]="'png jpeg'" [imageQuality]="100" [maintainAspectRatio]="false"
+    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+    [cropperMinWidth]="360"  [cropperMinHeight]="300" (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+<div class="m-t-20">
+    <!-- <button *ngIf="isImageExist" class="btn pull-left bordered ellipsis size" (click)="delete()">Delete</button> -->
+    <label class="btn pull-right bordered pointer ellipsis size" id="bannerImageUrlCancel" (click)="cancel($event)">Cancel</label>
+
+    <!-- <button [disabled]="file == null" class="btn btn-primary pull-right save" (click)="save()">Save</button> -->
+
+    <!-- <label class="btn pull-right bordered pointer ellipsis size" for="bannerImageUrl">Change</label>  -->
+    <label for="image"><span class="btn btn-image">Choose image</span></label>
+    <input type="file" style="display: none;"  id="image" (change)="fileChangeEvent($event)" />
+</div>
