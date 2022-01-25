@@ -1,5 +1,5 @@
 <!-- begin #header -->
-<div id="header" class="header navbar-default">
+<div id="header" class="header navbar-default" style="background-color: #1e88e5;">
   <!-- begin navbar-header -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle pull-left" *ngIf="this.pageSidebarTwo"
@@ -8,11 +8,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a href="/" class="navbar-brand">
-      <span class="navbar-logo" style="border: none;background: none;">
-        <img src="https://queallyprod.blob.core.windows.net/media/queally_logo_mini.png"/>
-      </span>
-    </a>
+    <div class="navbar-brand"></div>
     <button type="button" class="navbar-toggle pt-0 pb-0 mr-0" (click)="mobileTopMenuToggle()"
       *ngIf="this.pageSettings.pageTopMenu && !this.pageSettings.pageWithoutSidebar">
       <span class="fa-stack fa-lg text-inverse">

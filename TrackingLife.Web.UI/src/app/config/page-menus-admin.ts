@@ -6,8 +6,8 @@ let pageMenusAdmin = [
   },
   {
     'icon': '../../../assets/img/svg/news.svg',
-    'title': 'News',
-    'url': 'news'
+    'title': 'Balance',
+    'url': 'balance'
   },
   {
     'icon': '../../../assets/img/icons/wellness-room-48.png',

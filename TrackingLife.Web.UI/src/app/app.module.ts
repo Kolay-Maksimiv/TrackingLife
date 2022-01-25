@@ -50,7 +50,6 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CropImageComponent } from "./components/shared/crop-image/crop-image.component";
 
-
 //added components
 import { LoginComponent } from './auth/login-component/login-component.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -66,6 +65,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CropImageCategoryComponent } from './components/shared/crop-image-category/crop-image-category.component';
 import { CropImageLinkComponent } from './components/shared/crop-image-link/crop-image-link.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { BalanceComponent } from './components/balance/balance.component';
 export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locate/','.json'); 
 }
@@ -93,7 +93,8 @@ export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
     ForgotPasswordComponent,
     DashboardComponent,
     CropImageCategoryComponent,
-    CropImageLinkComponent
+    CropImageLinkComponent,
+    BalanceComponent
   ],
   imports: [
     AppRoutingModule,
@@ -124,6 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
     TrendModule,
     EditorModule,
     ImageCropperModule,
+
 
     // added modules
     HttpClientModule,

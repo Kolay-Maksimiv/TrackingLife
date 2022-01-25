@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,7 +22,7 @@ namespace TrackingLife.Web.Api.Controllers.AccountBalances
     /// <summary>
     /// Account Balance API Controller
     /// </summary>
-    //[Authorize(AuthenticationSchemes = IdentityServerAuthenticationDefaults.AuthenticationScheme, Roles = "System Admin")]
+    [Authorize(AuthenticationSchemes = IdentityServerAuthenticationDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class AccountBalancesController : BaseController
     {
@@ -76,7 +78,7 @@ namespace TrackingLife.Web.Api.Controllers.AccountBalances
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetAccountBalances(AccountBalancesFilter filter)
         {
-            //var isAdmin = await _userManager.IsInRoleAsync(CurrentUser, Consts.SystemAdmin);
+            var isAdmin = await _userManager.IsInRoleAsync(CurrentUser, Consts.SystemAdmin);
 
             var result = _accountBalancesService.GetAllAccountBalancesAsync(filter, out int itemsCount);
 

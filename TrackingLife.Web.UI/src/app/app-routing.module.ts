@@ -8,6 +8,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component'; 
+import { BalanceComponent } from './components/balance/balance.component';
 
 
 
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
   { path: 'login', component: LoginComponent, data: { title: 'Login' } },
   { path: 'registration', component: RegistrationComponent, data: { title: 'Create User' } },
-  // { path: 'news', component: NewsComponent, data: { title: 'News' } },
+  { path: 'balance', component: BalanceComponent, data: { title: 'Balance' } },
   // { path: 'users', component: UsersComponent, data: { title: 'User Management' } },
   // { path: 'users/create', component: UserCreateComponent, data: { title: 'Create Usert' } },
   // { path: 'users/edit/:id', component: UserEditComponent, data: { title: 'Edit User' } },
