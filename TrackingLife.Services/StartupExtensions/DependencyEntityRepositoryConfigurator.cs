@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TrackingLife.Data.Abstract.Email;
 using TrackingLife.Data.Abstract.Repository;
+using TrackingLife.Data.Domain.AccountBalances;
 using TrackingLife.Data.Domain.Identity;
 using TrackingLife.Data.Domain.Profiles;
+using TrackingLife.Data.Domain.Transactions;
 
 namespace TrackingLife.Services.StartupExtensions
 {
@@ -24,6 +23,8 @@ namespace TrackingLife.Services.StartupExtensions
             services.AddTransient<IRepository<ApplicationUser>, Repository<ApplicationUser>>();
             services.AddTransient<IRepository<Profile>, Repository<Profile>>();
             services.AddTransient<IEmailRepository, EmailRepository>();
+            services.AddTransient<IRepository<AccountBalance>, Repository<AccountBalance>>();
+            services.AddTransient<IRepository<Transaction>, Repository<Transaction>>();
         }
     }
 }

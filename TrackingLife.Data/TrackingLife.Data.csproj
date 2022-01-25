@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220110082432_AddBalance.cs" />
+    <Compile Remove="Migrations\20220110082432_AddBalance.Designer.cs" />
+    <Compile Remove="Migrations\20220110082549_AddBalance.cs" />
+    <Compile Remove="Migrations\20220110082549_AddBalance.Designer.cs" />
+    <Compile Remove="Migrations\20220110085407_AddTransaction.cs" />
+    <Compile Remove="Migrations\20220110085407_AddTransaction.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IdentityServer4.EntityFramework" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
@@ -20,10 +29,6 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.1" />
     <PackageReference Include="Nancy" Version="2.0.0" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\" />
   </ItemGroup>
 
 </Project>

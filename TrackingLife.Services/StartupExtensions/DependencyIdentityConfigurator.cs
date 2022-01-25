@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Logging;
-using System;
 using TrackingLife.Data;
 using TrackingLife.Data.Domain.Identity;
 using TrackingLife.Services.Identity.Auth;
 using TrackingLife.Services.Infrastructure;
-using TrackingLife.Services.Infrastructureс;
 using TrackingLife.Services.Installation;
 
 namespace TrackingLife.Services.StartupExtensions

@@ -108,6 +108,65 @@ namespace TrackingLife.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TrackingLife.Data.Domain.AccountBalances.AccountBalance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("CurrentBalance")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("LastTransactionDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UniqueAccount")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrentBalance");
+
+                    b.HasIndex("LastTransactionDateTime");
+
+                    b.HasIndex("UniqueAccount");
+
+                    b.ToTable("AccountBalance");
+                });
+
+            modelBuilder.Entity("TrackingLife.Data.Domain.AccountBalances.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AccountBalanceId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("CurrentBalance")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("LastTransactionDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UniqueTransaction")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountBalanceId");
+
+                    b.HasIndex("CurrentBalance");
+
+                    b.HasIndex("LastTransactionDateTime");
+
+                    b.HasIndex("UniqueTransaction");
+
+                    b.ToTable("Transaction");
+                });
+
             modelBuilder.Entity("TrackingLife.Data.Domain.Identity.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -239,10 +298,15 @@ namespace TrackingLife.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AccountBalanceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountBalanceId");
 
                     b.HasIndex("ApplicationUserId")
                         .IsUnique()
@@ -287,6 +351,14 @@ namespace TrackingLife.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TrackingLife.Data.Domain.AccountBalances.Transaction", b =>
+                {
+                    b.HasOne("TrackingLife.Data.Domain.AccountBalances.AccountBalance", "AccountBalance")
+                        .WithMany("Transactions")
+                        .HasForeignKey("AccountBalanceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("TrackingLife.Data.Domain.Identity.ApplicationUserRole", b =>
                 {
                     b.HasOne("TrackingLife.Data.Domain.Identity.ApplicationRole", "Role")
@@ -304,6 +376,10 @@ namespace TrackingLife.Data.Migrations
 
             modelBuilder.Entity("TrackingLife.Data.Domain.Profiles.Profile", b =>
                 {
+                    b.HasOne("TrackingLife.Data.Domain.AccountBalances.AccountBalance", "AccountBalance")
+                        .WithMany()
+                        .HasForeignKey("AccountBalanceId");
+
                     b.HasOne("TrackingLife.Data.Domain.Identity.ApplicationUser", "ApplicationUser")
                         .WithOne("Profile")
                         .HasForeignKey("TrackingLife.Data.Domain.Profiles.Profile", "ApplicationUserId");

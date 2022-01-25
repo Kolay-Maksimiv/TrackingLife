@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TrackingLife.Services.Identity.Registration;
 using TrackingLife.Services.Identity.User;
+using TrackingLife.Services.Services.AccountBalances;
 using TrackingLife.Services.Services.Email;
 using TrackingLife.Services.Services.Profiles;
 
@@ -22,6 +23,7 @@ namespace TrackingLife.Services.StartupExtensions
             services.AddTransient<IProfileService, ProfileService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+            services.AddTransient<IAccountBalancesService, AccountBalancesService>();
         }
     }
 }

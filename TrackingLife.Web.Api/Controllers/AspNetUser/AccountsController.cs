@@ -102,9 +102,7 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
                 await _userManager.AddToRoleAsync(userIdentity, Consts.UserRoleKey);
 
                 //send invitation email
-                var subject = "Welcome to MyHUB-Anytime!";
-                //var content = "Hello, " + model.FirstName + " " + model.LastName + "!"
-                //              + @" Log in to our portal Queally. Your email: " + model.Email + ". Password: " + password;
+                var subject = "Welcome to Tracking Life!";
 
                 var content = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/RegistrationEmail.cshtml", model);
                 var message = new Message(new List<string> { model.Email }, subject, content);
@@ -160,7 +158,7 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
                 await _userManager.AddToRoleAsync(userIdentity, model.Role);
 
                 //send invitation email
-                var subject = "Welcome to News Now!";
+                var subject = "Welcome to Tracking Life";
 
                 var content = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/RegistrationEmail.cshtml", model);
                 var message = new Message(new List<string> { model.Email }, subject, content);
@@ -323,7 +321,7 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
                 };
 
                 //send invitation email
-                var subject = "MyHUB-Anytime – Reset Your Password";
+                var subject = "Tracking Life – Reset Your Password";
 
                 var content = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/ForgotPassword.cshtml", token);
                 var message = new Message(new List<string> { model.Email }, subject, content);
@@ -360,7 +358,7 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
                 };
 
                 //send invitation email
-                var subject = "MyHUB-Anytime – Reset Your Password";
+                var subject = "Tracking Life – Reset Your Password";
 
                 var content = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/ForgotPasswordCode.cshtml", token);
                 var message = new Message(new List<string> { model.Email }, subject, content);

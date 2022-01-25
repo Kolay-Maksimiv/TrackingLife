@@ -1,0 +1,18 @@
+{
+    "Title": "Translation example",
+    "Intro": "Ласкаво просимо до Queally",
+    "Action": {
+        "Edit":"Ред.",
+        "Delete": "Вид.",
+        "Create":"Створити"
+    },
+    "News":{
+        "Header":"Новини",
+        "Image":"Фото",
+        "Title":"Заголовок",
+        "Date": "Дата",
+        "Level": "Рівень",
+        "Categories": "Категорії",
+        "SentNotification": "Надіслати Сповіщення"
+    }
+}
