@@ -22,10 +22,10 @@ export class HttpClientService {
   public static readonly CREATEUSER_CONTROLLER = HttpClientService.API + '/Accounts/create';
 
   // Categories Controller
-  public static readonly CATEGORIES_CONTROLLER = HttpClientService.API + "/categories";
-  public static readonly CATEGORIES_DETAILS_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/Details";
-  public static readonly CATEGORIES_DROPDOWNLIST_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/dropdownlist";
-  public static readonly CATEGORIES_GET_BY_FILTER_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/GetCategoriesByFilter";
+  public static readonly BALANCE_CONTROLLER = HttpClientService.API + "/Balance";
+  // public static readonly CATEGORIES_DETAILS_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/Details";
+  // public static readonly CATEGORIES_DROPDOWNLIST_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/dropdownlist";
+  // public static readonly CATEGORIES_GET_BY_FILTER_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/GetCategoriesByFilter";
 
   // News Controller
   public static readonly NEWS_CONTROLLER = HttpClientService.API + "/news";
