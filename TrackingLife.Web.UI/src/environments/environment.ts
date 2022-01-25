@@ -8,6 +8,6 @@ export const environment = {
   loginUrl: '/login',
   baseUrl: 'https://localhost:44365', // Change this to the address of your backend API if different from frontend address
   apiUrl: 'https://localhost:44365/api', // For frontent API HTTP
-  webUrl: 'https://localhost:51929', // For frontent Web HTTP
+  webUrl: 'http://localhost:4200', // For frontent Web HTTP
   tokenUrl: 'https://localhost:44365', // For IdentityServer/Authorization Server API. You can set to null if same as baseUrl
 };

@@ -1,8 +1,54 @@
 <panel>
     <ng-container header>
-      <div class="panel-title-dashboard" >Balance</div>
+      <div class="panel-title-dashboard" >Your Balance ({{ currentBalance }} UAH) last transaction date time {{ lastTransactionDateTime | date:'dd MMM yyy h:mm'  }}</div>
     </ng-container>
 
-    
+    <hr style="border-bottom: 1px solid #c4c4c4">
+    <!-- begin table-responsive -->
+    <div class="table-responsive" style="overflow-x: hidden;">
+      <div class="f-s-14 m-l-45" (click)="createCategoryLink()" style="margin-left: 110px; cursor: pointer;">
+        <b>Add Transaction</b> <img src="../../../assets/img/svg/plus.svg" width="20px" style="margin-left: 10px; font-size: 18px;  ">
+      </div>
+      <table class="table table-striped m-b-0">
+        <thead>
+          <tr>currentBalance</tr>
+        </thead>
+        <tbody>
+          <tr class="tr-custom-style pointer" *ngFor='let balance of balances'>
+             <td>
+                {{ balance.currentBalance }}
+            </td>
+            <td>
+               {{ balance.lastTransactionDateTime | date:'dd MMM yyy' }}
+            </td>
+            <td>
+              {{ balance.lastTransactionDateTime | date:'h:mm' }}
+          </td>
+          <td>
+            {{ balance.status }}
+        </td>    
+           <td class="with-btn"  style="text-align: right;">
+              <a (click)="clickEditLink(link.id)"
+                class="btn custom-btn edit-btn m-r-10">Edit</a>
+              <a class="btn custom-btn archive-btn" (click)="deleteCategory(link)">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    <ng-container footer>
+      <hr />
+      <ngb-pagination class="d-flex justify-content-center" [collectionSize]="length" [pageSize]="itemsPerPage"
+        [(page)]="page" [maxSize]="5" [rotate]="false" (pageChange)="loadPage($event)" [boundaryLinks]="false">
+        <ng-template class="page-arrow" ngbPaginationPrevious><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg> Prev</ng-template>
+        <ng-template ngbPaginationNext class="page-arrow">Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </svg></ng-template>
+        <ng-template ngbPaginationEllipsis>...</ng-template>
+      </ngb-pagination>
+    </ng-container>
+  </div>
     <div *ngIf="this.showLoader" id="page-loader" class="fade show" style="opacity: 0.5;"><span class="spinner"></span></div>
 </panel>

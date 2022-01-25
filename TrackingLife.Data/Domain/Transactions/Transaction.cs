@@ -22,9 +22,13 @@ namespace TrackingLife.Data.Domain.Transactions
         /// </summary>
         public DateTime LastTransactionDateTime { get; set; } = DateTime.UtcNow;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool Status { get; set; }
+        /// <summary>
         /// Account Balance
         /// </summary>
         public int? AccountBalanceId { get; set; }
-        public AccountBalance AccountBalance { get; set; }
+        public virtual AccountBalance AccountBalance { get; set; }
     }
 }

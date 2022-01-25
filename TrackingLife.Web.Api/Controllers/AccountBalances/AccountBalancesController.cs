@@ -10,6 +10,7 @@ using TrackingLife.Data.Domain.Identity;
 using TrackingLife.Data.Dto.AccountBalancesDto;
 using TrackingLife.Data.Interfaces;
 using TrackingLife.Data.SearchFilters;
+using TrackingLife.Services.Identity.User;
 using TrackingLife.Services.Services.AccountBalances;
 using TrackingLife.Services.Services.Profiles;
 using TrackingLife.Services.StaticData;
@@ -22,7 +23,6 @@ namespace TrackingLife.Web.Api.Controllers.AccountBalances
     /// <summary>
     /// Account Balance API Controller
     /// </summary>
-    [Authorize(AuthenticationSchemes = IdentityServerAuthenticationDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class AccountBalancesController : BaseController
     {
@@ -30,6 +30,7 @@ namespace TrackingLife.Web.Api.Controllers.AccountBalances
         private readonly IAccountBalancesService _accountBalancesService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IProfileService _profileService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -44,28 +45,14 @@ namespace TrackingLife.Web.Api.Controllers.AccountBalances
             IProfileService profileService,
             IAccountBalancesService accountBalancesService,
             IMapper mapper,
+            IUserService userService,
             UserManager<ApplicationUser> userManager) : base(workContext)
         {
             _profileService = profileService;
             _userManager = userManager;
+            _userService = userService;
             _mapper = mapper;
             _accountBalancesService = accountBalancesService;
-        }
-
-        /// <summary>
-        /// The get API item based on provided JSON object.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>The response is 200 (Status - Ok).</returns>
-        //[Authorize(Roles = "System Admin")]
-        [HttpGet("{id}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> GetAccountBalanceByIdAsync(int id)
-        {
-            var result = await _accountBalancesService.GetAccountBalanceByIdAsync(id);
-
-            return Ok(result);
         }
 
         /// <summary>
@@ -76,98 +63,22 @@ namespace TrackingLife.Web.Api.Controllers.AccountBalances
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetAccountBalances(AccountBalancesFilter filter)
+        public async Task<IActionResult> GetAccountBalances(int id)
         {
-            var isAdmin = await _userManager.IsInRoleAsync(CurrentUser, Consts.SystemAdmin);
+            id = 9;
+            var user = await _userService.GetByProfileIdAsync(id);
+            var profile = _profileService.GetProfileByUserId(user.Id);
 
-            var result = _accountBalancesService.GetAllAccountBalancesAsync(filter, out int itemsCount);
-
-            return Ok(new ListItemsModel<AccountBalanceDto>(result, itemsCount));
-        }
-
-
-        /// <summary>
-        /// The add API items based on provided JSON object.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>The response is 200 (Status - Ok).</returns>
-        //[Authorize(Roles = "System Admin")]
-        [HttpPost]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> AddAccountBalanceAsync([FromBody] AccountBalanceViewModel model)
-        {
-            var wellnessCategory = new AccountBalance()
+            var result = new AccountBalanceDto
             {
-                UniqueAccount = model.UniqueAccount,
-                CurrentBalance = model.CurrentBalance,
-                LastTransactionDateTime = model.LastTransactionDateTime
-
+                Id = profile.AccountBalance.Id,
+                CurrentBalance = profile.AccountBalance.CurrentBalance,
+                LastTransactionDateTime = profile.AccountBalance.LastTransactionDateTime,
+                UniqueAccount = profile.AccountBalance.UniqueAccount,
+                ProfileId = profile.Id
             };
-
-            var wellnessCategoryId = _accountBalancesService.AddAccountBalance(wellnessCategory);
-
-            var result = await _accountBalancesService.GetAccountBalanceAsync(wellnessCategoryId);
 
             return Ok(result);
         }
-
-        /// <summary>
-        /// The update API item based on provided JSON object.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>The response is 200 (Status - Ok).</returns>
-        [HttpPut]
-        public async Task<IActionResult> EditAccountBalance([FromBody] AccountBalanceViewModel model)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest();
-
-                var accountBalance = await _accountBalancesService.GetAccountBalanceByIdAsync(model.Id);
-                if (accountBalance == null)
-                    return NotFound();
-
-                accountBalance.CurrentBalance = model.CurrentBalance;
-                accountBalance.LastTransactionDateTime = model.LastTransactionDateTime;
-
-                _accountBalancesService.UpdateAccountBalance(accountBalance);
-
-                var result = _mapper.Map<AccountBalanceDto>(accountBalance);
-
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// The delete API item based on provided JSON object.
-        /// </summary>
-        /// <returns>The response is 200 (Status - Ok).</returns>
-        //[Authorize(Roles = "System Admin")]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
-        {
-            try
-            {
-                var accountBalance = await _accountBalancesService.FindAsync(id);
-
-                if (accountBalance == null)
-                    return BadRequest();
-
-                _accountBalancesService.Delete(accountBalance);
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
     }
 }

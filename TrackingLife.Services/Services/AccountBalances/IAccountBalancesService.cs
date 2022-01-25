@@ -9,8 +9,7 @@ namespace TrackingLife.Services.Services.AccountBalances
 {
     public interface IAccountBalancesService : IGeneralService<AccountBalance>
     {
-        Task<AccountBalanceDto> GetAccountBalanceAsync(int id);
-        List<AccountBalanceDto> GetAllAccountBalancesAsync(AccountBalancesFilter filter, out int itemsCount);
+        Task<AccountBalance> GetAccountBalanceAsync(int id);
         void UpdateAccountBalance(AccountBalance accountBalance);
         void Add(AccountBalance accountBalance);
         int AddAccountBalance(AccountBalance accountBalance);

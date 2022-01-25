@@ -12,6 +12,7 @@ namespace TrackingLife.Data.Configuration
             builder.ToTable("Transaction");
             builder.HasIndex(nameof(Transaction.UniqueTransaction));
             builder.HasIndex(nameof(Transaction.CurrentBalance));
+            builder.HasIndex(nameof(Transaction.Status));
             builder.HasIndex(nameof(Transaction.LastTransactionDateTime));
 
             builder.HasOne(p => p.AccountBalance)

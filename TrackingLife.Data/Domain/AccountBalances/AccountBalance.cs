@@ -10,7 +10,7 @@ namespace TrackingLife.Data.Domain.AccountBalances
     /// </summary>
     public class AccountBalance : Entity, IEntity<int>
     {
-        private ICollection<Transaction> _transactions;
+        private  ICollection<Transaction> _transactions;
         /// <summary>
         /// Account Number
         /// </summary>

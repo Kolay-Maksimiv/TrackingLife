@@ -165,6 +165,7 @@ namespace TrackingLife.Web.Api
 
             services.AddScoped<IAuthorizationHandler, IsRemovedUserHandler>();
 
+
         }
 
         /// <summary>

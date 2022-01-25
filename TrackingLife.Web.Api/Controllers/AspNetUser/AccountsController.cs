@@ -119,7 +119,7 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
         [HttpPost("login")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+       public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             if (ModelState.IsValid)
             {

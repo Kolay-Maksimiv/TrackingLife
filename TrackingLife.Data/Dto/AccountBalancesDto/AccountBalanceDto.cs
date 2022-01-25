@@ -9,7 +9,7 @@ namespace TrackingLife.Data.Dto.AccountBalancesDto
     /// </summary>
     public class AccountBalanceDto
     {
-        private ICollection<Transaction> _transactions;
+        private IEnumerable<Transaction> _transactions;
         /// <summary>
         /// Account id
         /// </summary>
@@ -26,5 +26,7 @@ namespace TrackingLife.Data.Dto.AccountBalancesDto
         /// Last Transaction Date Time
         /// </summary>
         public DateTime LastTransactionDateTime { get; set; }
+
+        public int ProfileId { get; set; }
     }
 }

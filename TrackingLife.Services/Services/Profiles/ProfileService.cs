@@ -46,7 +46,7 @@ namespace TrackingLife.Services.Services.Profiles
 
         public async Task<Profile> GetProfileAsync(int id)
         {
-            var profile = await Repository.Table.AsNoTracking()
+            var profile = await Repository.Table.Include(x => x.AccountBalance)
                 .Include(u => u.ApplicationUser)
                 .FirstOrDefaultAsync(u => u.Id.Equals(id));
             return profile;
@@ -64,6 +64,8 @@ namespace TrackingLife.Services.Services.Profiles
 
             var profile = Repository.Table
                 .Include(x => x.ApplicationUser)
+                .Include(b => b.AccountBalance)
+                .ThenInclude(c => c.Transactions)
                 .FirstOrDefault(x => x.ApplicationUserId.Equals(userId));
             return profile;
         }

@@ -18,44 +18,14 @@ namespace TrackingLife.Services.Services.AccountBalances
 
         }
 
-        public async Task<AccountBalanceDto> GetAccountBalanceAsync(int id)
+        public async Task<AccountBalance> GetAccountBalanceAsync(int id)
         {
-            var accountBalanceDto = new AccountBalanceDto();
-            var accountBalance = await Repository.Table.FirstOrDefaultAsync(a => a.Equals(id));
+            var accountBalance = await Repository.Table
+                .FirstOrDefaultAsync(a => a.Id == id);
 
-            accountBalanceDto.Id = id;
-            accountBalanceDto.UniqueAccount = accountBalance.UniqueAccount;
-            accountBalanceDto.CurrentBalance = accountBalance.CurrentBalance;
-            accountBalanceDto.LastTransactionDateTime = accountBalance.LastTransactionDateTime;
-
-            return accountBalanceDto;
+            return accountBalance;
         }
 
-        public List<AccountBalanceDto> GetAllAccountBalancesAsync(AccountBalancesFilter filter, out int itemsCount)
-        {
-            var skip = filter.PageNumber == 1 ? 0 : (filter.PageNumber * filter.Take) - filter.Take;
-            itemsCount = 9;
-
-            var accountBalance = Repository.Table;
-
-            itemsCount = accountBalance.Count();
-
-            var take = accountBalance.Count() < filter.Take ? accountBalance.Count() : filter.Take;
-
-            if(accountBalance.Count() > 0)
-            {
-                return accountBalance
-                    .Select(s => new AccountBalanceDto
-                    {
-                        Id = s.Id,
-                        UniqueAccount = s.UniqueAccount,
-                        CurrentBalance = s.CurrentBalance,
-                        LastTransactionDateTime = s.LastTransactionDateTime
-                    }).Skip(skip).Take(take).ToList();
-            }
-
-            return new List<AccountBalanceDto>();
-        }
 
         public void UpdateAccountBalance(AccountBalance accountBalance)
         {

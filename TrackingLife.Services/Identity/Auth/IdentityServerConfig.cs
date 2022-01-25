@@ -60,11 +60,7 @@ namespace TrackingLife.Services.Identity.Auth
                     
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId, // For UserInfo endpoint.
-                        IdentityServerConstants.StandardScopes.Profile,
-                        IdentityServerConstants.StandardScopes.Phone,
-                        IdentityServerConstants.StandardScopes.Email,
-                        JwtClaimTypes.Role,
-                        ApiName
+                        IdentityServerConstants.StandardScopes.Profile
                     },
                     AllowOfflineAccess = true, // For refresh token.
                     RefreshTokenExpiration = TokenExpiration.Sliding,

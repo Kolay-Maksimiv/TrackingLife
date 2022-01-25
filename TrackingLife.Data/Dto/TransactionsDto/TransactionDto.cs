@@ -21,6 +21,10 @@ namespace TrackingLife.Data.Dto.TransactionsDto
         /// </summary>
         public DateTime LastTransactionDateTime { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+        public bool Status { get; set; }
+        /// <summary>
         /// Account Balance
         /// </summary>
         public int? AccountBalanceId { get; set; }

@@ -19,6 +19,7 @@ namespace TrackingLife.Services.Identity.Auth
         private readonly IRefreshTokenService _refreshTokenService;
         private readonly ITokenService _tokenService;
         private readonly UserManager<ApplicationUser> _userManager;
+
         public AuthService(UserManager<ApplicationUser> userManager,
             ITokenService tokenService,
             IRefreshTokenService refreshTokenService,
@@ -57,7 +58,7 @@ namespace TrackingLife.Services.Identity.Auth
         public async Task<string> GetJwtAsync(string username, string clientId)
         {
             var request = new TokenCreationRequest();
-
+            string tokenValue;
             var user = await _userManager.FindByNameAsync(username);
             var claimsPrincipal = await _principalFactory.CreateAsync(user);
             var identityUser = new IdentityServerUser(user.Id)
@@ -81,12 +82,14 @@ namespace TrackingLife.Services.Identity.Auth
 
             var tokenObj = await _tokenService.CreateAccessTokenAsync(request);
             var accessToken = await _tokenService.CreateSecurityTokenAsync(tokenObj);
-            tokenObj.Type = "refresh_token";
+            //tokenObj.Type = "refresh_token";
+            //var refreshToken =
+            //    await _refreshTokenService.CreateRefreshTokenAsync(request.Subject, tokenObj, client);
 
-            var tokenValue = "{\"access_token\": \"" + accessToken + "\", \"refresh_token\" : \"" +
-                         "\", \"expires_in\": \"" + client?.AccessTokenLifetime + "\"}";
+            tokenValue = "{\"access_token\": \"" + accessToken + "\", \"expires_in\": \"" + client?.AccessTokenLifetime + "\"}";
 
             return tokenValue;
+
         }
     }
 }

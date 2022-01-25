@@ -22,8 +22,8 @@ export class HttpClientService {
   public static readonly CREATEUSER_CONTROLLER = HttpClientService.API + '/Accounts/create';
 
   // Categories Controller
-  public static readonly BALANCE_CONTROLLER = HttpClientService.API + "/Balance";
-  // public static readonly CATEGORIES_DETAILS_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/Details";
+  public static readonly BALANCES_CONTROLLER = HttpClientService.API + "/accountBalances";
+  public static readonly TRANSACTION_CONTROLER  = HttpClientService.API + "/transactions";
   // public static readonly CATEGORIES_DROPDOWNLIST_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/dropdownlist";
   // public static readonly CATEGORIES_GET_BY_FILTER_CONTROLLER = HttpClientService.CATEGORIES_CONTROLLER + "/GetCategoriesByFilter";
 

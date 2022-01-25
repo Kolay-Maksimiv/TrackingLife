@@ -27,6 +27,7 @@ namespace TrackingLife.Services.Services.Transactions
 
             transactionDto.Id = id;
             transactionDto.UniqueTransaction = transaction.UniqueTransaction;
+            transactionDto.Status = transaction.Status;
             transactionDto.CurrentBalance = transaction.CurrentBalance;
             transactionDto.LastTransactionDateTime = transaction.LastTransactionDateTime;
             transactionDto.AccountBalanceId = transaction.AccountBalance?.Id;
@@ -42,7 +43,7 @@ namespace TrackingLife.Services.Services.Transactions
             var transaction = Repository.Table
                 .Include(t => t.AccountBalance)
                 .Where(w => w.AccountBalanceId
-                .Equals(filter.AccountBalanceId));
+                .Equals(filter.BalanceId));
 
             itemsCount = transaction.Count();
 
@@ -57,6 +58,7 @@ namespace TrackingLife.Services.Services.Transactions
                         UniqueTransaction = s.UniqueTransaction,
                         CurrentBalance = s.CurrentBalance,
                         LastTransactionDateTime = s.LastTransactionDateTime,
+                        Status = s.Status,
                         AccountBalanceId = s.AccountBalanceId
                     }).Skip(skip).Take(take).ToList();
             }
@@ -102,6 +104,7 @@ namespace TrackingLife.Services.Services.Transactions
 
             transactionDto.Id = id;
             transactionDto.UniqueTransaction = transaction.UniqueTransaction;
+            transactionDto.Status = transaction.Status;
             transactionDto.CurrentBalance = transaction.CurrentBalance;
             transactionDto.LastTransactionDateTime = transaction.LastTransactionDateTime;
             transactionDto.AccountBalanceId = transaction.AccountBalanceId;
