@@ -7,15 +7,16 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', data: { title: 'Dashboard' } },
 
-  // { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
+  { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
   { path: 'login', component: LoginComponent, data: { title: 'Login' } },
-  { path: 'registration', component: RegistrationComponent, data: { title: 'Create User' } },
+  { path: 'registration', component: RegistrationComponent, data: { title: 'Registration' } },
   // { path: 'news', component: NewsComponent, data: { title: 'News' } },
   // { path: 'users', component: UsersComponent, data: { title: 'User Management' } },
   // { path: 'users/create', component: UserCreateComponent, data: { title: 'Create Usert' } },

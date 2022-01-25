@@ -15,6 +15,7 @@ export class AuthService {
   private tokenExpirationTime: any;
   private _jwtHelper = new JwtHelper();
   myHeaders: HttpHeaders = new HttpHeaders();
+  user = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient, private router: Router, private _authService: AuthService) {
   }
@@ -49,7 +50,7 @@ export class AuthService {
     let refreshBody = new URLSearchParams();
     refreshBody.set('refresh_token', refreshToken);
     refreshBody.set('grant_type', "refresh_token");
-    refreshBody.set('client_id', "queally_spa");
+    refreshBody.set('client_id', "trackingLife_spa");
 
     return this.http.post<LoginResponseModel>(HttpClientService.IDENTITY_SERVER_CONNECT, refreshBody.toString(), { headers: this.myHeaders })
       .pipe(tap(result => {
@@ -63,39 +64,50 @@ export class AuthService {
 
   login(data: LoginModel) {
 
-    this.stopRefreshTokenTimer();
+    this.myHeaders = new HttpHeaders().set("Content-Type", "application/json;");
+    this.myHeaders = this.myHeaders.append("Access-Control-Allow-Origin", HttpClientService.WEB);
 
-    this.myHeaders = new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded");
+    return this.http.post<LoginResponseModel>(HttpClientService.LOGIN_CONTROLLER, data, { headers: this.myHeaders })
+      .pipe(tap(resData => {
 
-    let loginBody = new URLSearchParams();
-    loginBody.set('username', data.email);
-    loginBody.set('password', data.password);
-    loginBody.set('grant_type', "password");
-    loginBody.set('client_id', "queally_spa");
+        localStorage.setItem('dataSource', resData.token);
+        localStorage.setItem('organisationName', resData.organisationName);
 
-    return this.http.post<LoginResponseModel>(HttpClientService.IDENTITY_SERVER_CONNECT, loginBody.toString(), { headers: this.myHeaders })
-      .pipe(tap(response => {
-        var accessToken = response.access_token;
+       let expiresIn = JSON.parse(localStorage.getItem('dataSource')).expires_in;
 
-        localStorage.setItem('access_token', accessToken);
-        localStorage.setItem('refresh_token', response.refresh_token);
+        const espirationDate = new Date(new Date().getTime() + +expiresIn * 1000); //*1000 convert from seconds to miliseconds // getTime() get time in miliseconds
 
-        const jwtToken = JSON.parse(atob(accessToken.split('.')[1]));
-        response.roles = jwtToken.role;
+        const user = new User(resData.email,
+          resData.roles,
+          resData.firstName,
+          resData.lastName,
+          resData.imageUrl,
+          resData.organisationName,
+          resData.userId, 
+          JSON.parse(localStorage.getItem('dataSource')).access_token,
+          espirationDate);
 
-        this.startRefreshTokenTimer();
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.user.next(user);
+        this.autoLogout(+expiresIn * 1000);
       }));
   }
 
   registration(data: RegistrationModel) {
     this.myHeaders = new HttpHeaders().set("Content-Type", "application/json;");
-    this.myHeaders = this.myHeaders.append('client_id', 'news_now_spa');
+    this.myHeaders = this.myHeaders.append('client_id', 'trackingLife_spa');
     this.myHeaders = this.myHeaders.append("Access-Control-Allow-Origin", HttpClientService.WEB);
     const jsonData = JSON.stringify(data);
     return this.http.post(HttpClientService.REGISTRATION_CONTROLLER, jsonData, { headers: this.myHeaders })
       .pipe(tap(resData => {
-        this.router.navigate(['/users']);
+        this.router.navigate(['/login']);
       }));
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTime = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 
   forgotPasswordCodeRequest(email: string) {

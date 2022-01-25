@@ -62,6 +62,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locate/','.json'); 
 }
@@ -85,6 +86,7 @@ export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
     SafeHtmlPipe,
     ResetPasswordComponent,
     ForgotPasswordComponent,
+    DashboardComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -139,7 +141,7 @@ export class AppModule {
   constructor(private router: Router, private titleService: Title, private route: ActivatedRoute) {
     router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
-        var title = 'Queally | ' + this.route.snapshot.firstChild.data['title'];
+        var title = 'Tracking Life | ' + this.route.snapshot.firstChild.data['title'];
         this.titleService.setTitle(title);
       }
     });

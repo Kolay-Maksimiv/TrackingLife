@@ -14,7 +14,7 @@ namespace TrackingLife.Data.Domain.AccountBalances
         /// <summary>
         /// Account Number
         /// </summary>
-        public Guid UniqueAccount { get; set; }
+        public Guid UniqueAccount { get; set; } = Guid.NewGuid();
         /// <summary>
         /// Current Balance
         /// </summary>

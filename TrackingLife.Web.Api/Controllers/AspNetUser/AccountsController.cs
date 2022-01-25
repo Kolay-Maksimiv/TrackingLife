@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrackingLife.Data.Domain.AccountBalances;
 using TrackingLife.Data.Domain.Identity;
 using TrackingLife.Data.Dto;
 using TrackingLife.Data.Dto.Email;
@@ -70,7 +72,6 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
             _userService = userService;
             _razorViewToStringRenderer = razorViewToStringRenderer;
         }
-
         /// <summary>
         /// The create API allows to create a Profile item based on provided JSON object.
         /// </summary>
@@ -80,90 +81,28 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        [ValidationFilter]
-        public async Task<IActionResult> CreateAsync([FromBody] RegistrationViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-
-                var password = model.Password ?? GeneratePass();
-                model.Password = password;
-                model.ConfirmPassword = password;
-                var userIdentity = _mapper.Map<ApplicationUser>(model);
-                var isSuccess = await _registrationService.RegisterAsync(userIdentity, model.Password, model.CallbackUrl);
-
-                if (!isSuccess)
-                    return Bad(Error.InvalidUserNameOrPassword);
-
-                var profile = new Data.Domain.Profiles.Profile { ApplicationUserId = userIdentity.Id };
-                _profileService.AddProfile(profile);
-
-                //add role 
-                await _userManager.AddToRoleAsync(userIdentity, Consts.UserRoleKey);
-
-                //send invitation email
-                var subject = "Welcome to Tracking Life!";
-
-                var content = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/RegistrationEmail.cshtml", model);
-                var message = new Message(new List<string> { model.Email }, subject, content);
-
-                await _emailService.SendEmailAsync(message);
-
-                return Ok();
-            }
-
-            return BadRequest();
-        }
-
-        /// <summary>
-        /// The create API allows to create a Profile item based on provided JSON object.
-        /// </summary>
-        /// <param name="model">Registration view model</param>
-        /// <returns>Returns a 200 response if item added. Can return 400 if model state is
-        /// not valid</returns>
-        [HttpPost("create")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-
-                if (model.CreatePasswordAutomatically)
-                {
-                    var password = model.Password ?? GeneratePass();
-                    model.Password = password;
-                    model.ConfirmPassword = password;
-                }
-                else
-                {
-                    if (!model.Password.Equals(model.ConfirmPassword))
-                    {
-                        return BadRequest("Password and Confirm password must be the same");
-                    }
-                }
+                model.Role = Consts.SystemAdmin;
                 var userIdentity = _mapper.Map<ApplicationUser>(model);
-                var isSuccess = await _registrationService.RegisterAsync(userIdentity, model.Password, String.Empty);
+                var isSuccess = await _registrationService.RegisterAsync(userIdentity, model.Password);
 
                 if (!isSuccess)
                     return BadRequest("Invalid user name or password");
 
                 var profile = new Data.Domain.Profiles.Profile
                 {
-                    ApplicationUserId = userIdentity.Id
+                    ApplicationUserId = userIdentity.Id,
+                    AccountBalance = new AccountBalance { CurrentBalance = 0 },
+                    Phone = model.Phone
                 };
                 _profileService.AddProfile(profile);
 
                 //add role 
                 await _userManager.AddToRoleAsync(userIdentity, model.Role);
-
-                //send invitation email
-                var subject = "Welcome to Tracking Life";
-
-                var content = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/RegistrationEmail.cshtml", model);
-                var message = new Message(new List<string> { model.Email }, subject, content);
-
-                await _emailService.SendEmailAsync(message);
+                await _userManager.SetPhoneNumberAsync(userIdentity, model.Phone);
 
                 return Ok();
             }
@@ -178,7 +117,6 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
         /// <returns>Returns a 200 response if item added. Can return 400 if model state is
         /// not valid</returns>
         [HttpPost("login")]
-        //[EnableCors(origins: "*", headers: "*", methods: "*")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
@@ -202,7 +140,8 @@ namespace TrackingLife.Web.Api.Controllers.AspNetUser
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Roles = roles,
-                    Token = token
+                    Token = token,
+                    Phone = user.PhoneNumber
                 };
 
                 return Ok(userData);

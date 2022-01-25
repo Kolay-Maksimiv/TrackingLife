@@ -14,6 +14,7 @@ namespace TrackingLife.Data.Domain.Profiles
         /// </summary>
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+        public string Phone { get; set; }
         /// <summary>
         /// 
         /// </summary>

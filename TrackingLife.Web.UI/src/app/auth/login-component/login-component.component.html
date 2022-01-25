@@ -12,7 +12,7 @@
       <div class="card">
           <div class="card-body p-30">
               <div class="text-center m-b-30">
-                  <img src="https://queallyprod.blob.core.windows.net/media/queally_logo.png"/>
+                  <img src="assets/img/logo/logo.png" alt="logo">
               </div>
               <form #loginForm="ngForm" (ngSubmit)="submitLogin(loginForm)"  class="margin-bottom-0">
                   <div class="form-group m-b-20">
@@ -35,6 +35,7 @@
                               required>
                   </div>
                   <div class="m-b-20 pull-right pointer forgot-block" [routerLinkActive]="['link-active']" [routerLink]="['/forgot-password']"> Forgot Password ? </div>
+                  <div class="m-b-20 pull-left pointer forgot-block" [routerLinkActive]="['link-active']" [routerLink]="['/registration']">Registration</div>
                   <div class="login-buttons">
                       <button class="btn btn-success btn-block btn-lg" [disabled]="!loginForm.valid">Sign in</button>
                   </div>

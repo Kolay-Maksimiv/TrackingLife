@@ -4,11 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 51929 --proxy-config proxy.conf.json",
-    "build": "ng build",
-    "build-dev": "ng build --configuration=dev --prod",
-    "build-stg": "ng build --configuration=stg --prod",
-    "build-prod": "ng build --configuration=production --prod",
+    "start": "ng serve --proxy-config proxy.config.json",
+    "build": "ng build --prod --output-path ../TrackingLife.Web.Api/wwwroot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

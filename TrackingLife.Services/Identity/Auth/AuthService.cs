@@ -82,10 +82,8 @@ namespace TrackingLife.Services.Identity.Auth
             var tokenObj = await _tokenService.CreateAccessTokenAsync(request);
             var accessToken = await _tokenService.CreateSecurityTokenAsync(tokenObj);
             tokenObj.Type = "refresh_token";
-            var refreshToken =
-                await _refreshTokenService.CreateRefreshTokenAsync(request.Subject, tokenObj, client);
 
-            var tokenValue = "{\"access_token\": \"" + accessToken + "\", \"refresh_token\" : \"" + refreshToken +
+            var tokenValue = "{\"access_token\": \"" + accessToken + "\", \"refresh_token\" : \"" +
                          "\", \"expires_in\": \"" + client?.AccessTokenLifetime + "\"}";
 
             return tokenValue;

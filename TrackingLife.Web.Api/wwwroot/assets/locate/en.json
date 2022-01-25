@@ -1,0 +1,18 @@
+{
+    "Title": "Translation example",
+    "Intro": "Welcome to Queally.",
+    "Action": {
+        "Edit":"Edit",
+        "Delete": "Delete",
+        "Create":"New"
+    },
+    "News":{
+        "Header":"News",
+        "Image":"Image",
+        "Title":"Title",
+        "Date": "Date",
+        "Level": "Level",
+        "Categories": "Categories",
+        "SentNotification": "Sent Notification"
+    }
+}

@@ -116,7 +116,8 @@ namespace TrackingLife.Web.Api
             }
 
             var allowedOrigins = new string[] {
-                "http://localhost:51929"
+                "http://localhost:44366",
+                "https://localhost:44365"
             };
 
             services.AddSingleton<ICorsPolicyService>((container) =>
@@ -132,7 +133,7 @@ namespace TrackingLife.Web.Api
             {
                 options.AddPolicy(CorsPolicyName, builder =>
                 {
-                    builder.WithOrigins(allowedOrigins)
+                    builder.WithOrigins("http://localhost:4200")
                            .AllowAnyHeader()
                            .AllowAnyMethod()
                            .AllowCredentials();

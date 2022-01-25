@@ -14,7 +14,7 @@ namespace TrackingLife.Services.Identity.Registration
             _userService = userService;
         }
 
-        public async Task<bool> RegisterAsync(ApplicationUser user, string password, string baseUrl)
+        public async Task<bool> RegisterAsync(ApplicationUser user, string password)
         {
             user.FirstName = Regex.Replace(user.FirstName, @"\s+", " ").Trim();
             user.LastName = Regex.Replace(user.LastName, @"\s+", " ").Trim();

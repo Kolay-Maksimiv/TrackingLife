@@ -42,26 +42,6 @@ namespace TrackingLife.Web.Api.ViewModels.AspNetUser
         public List<string> Roles { get; set; }
 
         /// <summary>
-        /// CompanyId
-        /// </summary>
-        public int? CompanyId { get; set; }
-
-        /// <summary>
-        /// Company name
-        /// </summary>
-        public string CompanyName { get; set; }
-
-        /// <summary>
-        /// OrganisationId
-        /// </summary>
-        public int? OrganisationId { get; set; }
-
-        /// <summary>
-        /// Organisation name
-        /// </summary>
-        public string OrganisationName { get; set; }
-
-        /// <summary>
         /// 
         /// </summary>
         public string Token { get; set; }
