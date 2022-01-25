@@ -56,33 +56,13 @@ import { LoginComponent } from './auth/login-component/login-component.component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegistrationComponent } from './auth/registration/registration.component';
-import { CategoryComponent } from './components/category/category.component';
-import { NewsComponent } from './components/news/news.component';
-import { UsersComponent } from './components/users/users.component';
-import { NewsCreateComponent } from './components/news-create/news-create.component';
-import { CategoryCreateComponent } from './components/category-create/category-create.component';
-import { CompanyComponent } from './components/company/company.component';
-import { CategoryEditComponent } from './components/category-edit/category-edit.component';
-import { NewsEditComponent } from './components/news-edit/news-edit.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ToastComponent } from './components/general/toast/toast.component';
-import { NewsDetailsComponent } from './components/news-details/news-details.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-import { NewsPreviewComponent } from './components/newshelpers/news-preview/news-preview.component';
-import { UserEditComponent } from './components/user-management/user-edit/user-edit.component';
-import { CompanyCreateComponent } from './components/companies/company-create/company-create.component';
-import { CompanyEditComponent } from './components/companies/company-edit/company-edit.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { UserCreateComponent } from './components/user-management/user-create/user-create.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { WellnessCategoryComponent } from './components/wellness-room/wellness-category/wellness-category.component';
-import { CreateCategoryComponent } from './components/wellness-room/wellness-category/create-category/create-category.component';
-import { EditCategoryComponent } from './components/wellness-room/wellness-category/edit-category/edit-category.component';
-import { WellnessLinkComponent } from './components/wellness-room/wellness-link/wellness-link.component';
-import { CreateLinkComponent } from './components/wellness-room/wellness-link/create-link/create-link.component';
-import { EditLinkComponent } from './components/wellness-room/wellness-link/edit-link/edit-link.component';
 import { CropImageCategoryComponent } from './components/shared/crop-image-category/crop-image-category.component';
 import { CropImageLinkComponent } from './components/shared/crop-image-link/crop-image-link.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
@@ -106,32 +86,12 @@ export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
     LoginComponent,
     PageNotFoundComponent,
     RegistrationComponent,
-    CategoryComponent,
-    NewsComponent,
-    UsersComponent,
-    NewsCreateComponent,
-    CategoryCreateComponent,
-    CompanyComponent,
-    CategoryEditComponent,
-    NewsEditComponent,
     ToastComponent,
-    NewsDetailsComponent,
     SafeHtmlPipe,
-    NewsPreviewComponent,
-    UserEditComponent,
-    CompanyCreateComponent,
-    CompanyEditComponent,
     SettingsComponent,
     ResetPasswordComponent,
-    UserCreateComponent,
     ForgotPasswordComponent,
     DashboardComponent,
-    WellnessCategoryComponent,
-    CreateCategoryComponent,
-    EditCategoryComponent,
-    WellnessLinkComponent,
-    CreateLinkComponent,
-    EditLinkComponent,
     CropImageCategoryComponent,
     CropImageLinkComponent
   ],
