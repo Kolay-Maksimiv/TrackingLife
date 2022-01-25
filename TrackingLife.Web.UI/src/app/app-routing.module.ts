@@ -7,30 +7,18 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component'; 
 import { BalanceComponent } from './components/balance/balance.component';
+import { TransactionCreateComponent } from './components/transaction-create/transaction-create.component';
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full', data: { title: 'Dashboard' } },
-
-  { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
+  { path: '', redirectTo: 'home', pathMatch: 'full', data: { title: 'Balance ' } },
   { path: 'login', component: LoginComponent, data: { title: 'Login' } },
   { path: 'registration', component: RegistrationComponent, data: { title: 'Create User' } },
+  { path: '', component: BalanceComponent, data: { title: 'Balance' } },
   { path: 'balance', component: BalanceComponent, data: { title: 'Balance' } },
-  // { path: 'users', component: UsersComponent, data: { title: 'User Management' } },
-  // { path: 'users/create', component: UserCreateComponent, data: { title: 'Create Usert' } },
-  // { path: 'users/edit/:id', component: UserEditComponent, data: { title: 'Edit User' } },
-  // { path: 'news/add', component: NewsCreateComponent, data: { title: 'Create News' } },
-  // { path: 'news/:id', component: NewsDetailsComponent, data: { title: 'News Details' } },
-  // { path: 'news/edit/:id', component: NewsEditComponent, data: { title: 'Edit News' } },
-  // { path: 'wellnessroom/category', component: WellnessCategoryComponent, data: { title: 'Wellness Category' } },
-  // { path: 'wellnessroom/category/create', component: CreateCategoryComponent, data: { title: 'Create Category' } },
-  // { path: 'wellnessroom/category/edit/:id', component: EditCategoryComponent, data: { title: 'Edit Category' } },
-  // { path: 'wellnessroom/category/:id/link', component: WellnessLinkComponent, data: { title: 'Category Links' } },
-  // { path: 'wellnessroom/category/:id/link/create', component: CreateLinkComponent, data: { title: 'Create Links' } },
-  // { path: 'wellnessroom/category/:id/link/edit/:linkId', component: EditLinkComponent, data: { title: 'Edit Links' } },
+  { path: 'balance/create-transaction', component: TransactionCreateComponent, data: { title: 'Transaction Create' } },
   
   { path: 'reset-password', component: ResetPasswordComponent, data: { title: 'Reset Password' } },
   { path: 'forgot-password', component: ForgotPasswordComponent, data: { title: 'Forgot Password' } },

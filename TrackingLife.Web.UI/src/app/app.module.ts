@@ -58,14 +58,11 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ToastComponent } from './components/general/toast/toast.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-import { SettingsComponent } from './components/settings/settings.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CropImageCategoryComponent } from './components/shared/crop-image-category/crop-image-category.component';
-import { CropImageLinkComponent } from './components/shared/crop-image-link/crop-image-link.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { BalanceComponent } from './components/balance/balance.component';
+import { TransactionCreateComponent } from './components/transaction-create/transaction-create.component';
 export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locate/','.json'); 
 }
@@ -88,13 +85,10 @@ export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
     RegistrationComponent,
     ToastComponent,
     SafeHtmlPipe,
-    SettingsComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
-    DashboardComponent,
-    CropImageCategoryComponent,
-    CropImageLinkComponent,
-    BalanceComponent
+    BalanceComponent,
+    TransactionCreateComponent
   ],
   imports: [
     AppRoutingModule,

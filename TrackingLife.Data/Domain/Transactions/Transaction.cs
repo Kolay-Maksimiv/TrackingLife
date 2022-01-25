@@ -1,6 +1,7 @@
 ﻿using System;
 using TrackingLife.Data.Abstract.Entity;
 using TrackingLife.Data.Domain.AccountBalances;
+using TrackingLife.Data.Enums;
 
 namespace TrackingLife.Data.Domain.Transactions
 {
@@ -24,7 +25,7 @@ namespace TrackingLife.Data.Domain.Transactions
         /// <summary>
         /// 
         /// </summary>
-        public bool Status { get; set; }
+        public TransactionType? Status { get; set; }
         /// <summary>
         /// Account Balance
         /// </summary>

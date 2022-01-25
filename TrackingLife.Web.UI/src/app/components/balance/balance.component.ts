@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { BalanceModel } from 'app/models/balance/balanceModel';
 import { TransactionsFilter } from 'app/models/transactions/transactionFilter';
 import { TransactionsService } from 'app/models/transactions/transactions';
@@ -26,6 +26,7 @@ export class BalanceComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(
+    private router: Router,
     private balanceService : BalanceService,
     private transactionsService: TransactionsService,
     private route: ActivatedRoute) {
@@ -72,5 +73,7 @@ export class BalanceComponent implements OnInit {
     }
   }
 
-
+  createTransaction() {
+    this.router.navigate(['/balance/create-transaction']);
+  }
 }

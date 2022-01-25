@@ -1,4 +1,5 @@
 ﻿using System;
+using TrackingLife.Data.Enums;
 
 namespace TrackingLife.Web.Api.ViewModels
 {
@@ -7,6 +8,6 @@ namespace TrackingLife.Web.Api.ViewModels
         public int Id { get; set; }
         public float CurrentBalance { get; set; }
         public  int BalanceId { get; set; }
-        public bool Status { get; set; }
+        public TransactionType? Status { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TrackingLife.Data.Domain.Identity;
 using TrackingLife.Data.Domain.Transactions;
 using TrackingLife.Data.Dto.TransactionsDto;
+using TrackingLife.Data.Enums;
 using TrackingLife.Data.Interfaces;
 using TrackingLife.Data.SearchFilters;
 using TrackingLife.Services.Services.AccountBalances;
@@ -88,7 +89,15 @@ namespace TrackingLife.Web.Api.Controllers.Transactions
             };
 
             var currentBalance = await _accountBalancesService.GetAccountBalanceAsync(model.BalanceId);
-            currentBalance.CurrentBalance = currentBalance.CurrentBalance + model.CurrentBalance;
+            if (model.Status == TransactionType.Costs)
+            {
+                currentBalance.CurrentBalance = currentBalance.CurrentBalance - model.CurrentBalance;
+            }
+            else
+            {
+                currentBalance.CurrentBalance = currentBalance.CurrentBalance + model.CurrentBalance;
+            }
+
             currentBalance.LastTransactionDateTime = transaction.LastTransactionDateTime;
 
              _accountBalancesService.UpdateAccountBalance(currentBalance);

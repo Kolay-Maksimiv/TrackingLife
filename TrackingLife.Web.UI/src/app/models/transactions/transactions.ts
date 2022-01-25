@@ -7,6 +7,7 @@ import { AuthService } from 'app/auth/auth.service';
 import { BalanceModel } from 'app/models/balance/balanceModel';
 import { ListItemsModel } from 'app/models/abstract/listItemsModel';
 import { TransactionsFilter } from './transactionFilter';
+import { CreateTransactionModel } from '../auth/create-user.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -25,4 +26,11 @@ export class TransactionsService {
             .pipe(tap(resData => {
             }));
     }
+
+    createTransactions(data: CreateTransactionModel) {
+
+        return this.http.post(HttpClientService.TRANSACTION_CONTROLER, data, { headers: this.myHeaders })
+          .pipe(tap(resData => {
+          }));
+      }
 }

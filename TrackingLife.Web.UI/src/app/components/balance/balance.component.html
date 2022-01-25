@@ -6,32 +6,32 @@
     <hr style="border-bottom: 1px solid #c4c4c4">
     <!-- begin table-responsive -->
     <div class="table-responsive" style="overflow-x: hidden;">
-      <div class="f-s-14 m-l-45" (click)="createCategoryLink()" style="margin-left: 110px; cursor: pointer;">
+      <div class="f-s-14 m-l-45" (click)="createTransaction()" style="margin-left: 110px; cursor: pointer;">
         <b>Add Transaction</b> <img src="../../../assets/img/svg/plus.svg" width="20px" style="margin-left: 10px; font-size: 18px;  ">
       </div>
       <table class="table table-striped m-b-0">
         <thead>
-          <tr>currentBalance</tr>
+          <td>Costs / Income</td>
+          <td>Date</td>
+          <td>Time</td>
+          <td>Status</td>
         </thead>
         <tbody>
           <tr class="tr-custom-style pointer" *ngFor='let balance of balances'>
-             <td>
-                {{ balance.currentBalance }}
-            </td>
+                <div [ngClass] = "{'negative': balance.status == 0, 'positive' : balance.status != 0}">
+                  <td *ngIf="balance.status != 0"> {{ balance.currentBalance }}</td>
+                  <td *ngIf="balance.status == 0"> {{ balance.currentBalance }}</td>
+              </div>
             <td>
                {{ balance.lastTransactionDateTime | date:'dd MMM yyy' }}
             </td>
             <td>
               {{ balance.lastTransactionDateTime | date:'h:mm' }}
           </td>
-          <td>
-            {{ balance.status }}
-        </td>    
-           <td class="with-btn"  style="text-align: right;">
-              <a (click)="clickEditLink(link.id)"
-                class="btn custom-btn edit-btn m-r-10">Edit</a>
-              <a class="btn custom-btn archive-btn" (click)="deleteCategory(link)">Delete</a>
-            </td>
+            <div [ngClass] = "{'negative': balance.status == 0, 'positive' : balance.status != 0}">
+                <td *ngIf="balance.status != 0">Income</td>
+                <td *ngIf="balance.status == 0">Costs</td>
+            </div>
           </tr>
         </tbody>
       </table>

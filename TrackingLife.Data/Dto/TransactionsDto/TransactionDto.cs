@@ -1,4 +1,5 @@
 ﻿using System;
+using TrackingLife.Data.Enums;
 
 namespace TrackingLife.Data.Dto.TransactionsDto
 {
@@ -23,7 +24,7 @@ namespace TrackingLife.Data.Dto.TransactionsDto
         /// <summary>
         /// 
         /// </summary>
-        public bool Status { get; set; }
+        public TransactionType? Status { get; set; }
         /// <summary>
         /// Account Balance
         /// </summary>
