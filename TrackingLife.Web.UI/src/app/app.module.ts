@@ -62,7 +62,6 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 import { AuthInterceptor } from './auth/auth-interceptor';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
 export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locate/','.json'); 
 }
@@ -85,8 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) : TranslateLoader {
     ToastComponent,
     SafeHtmlPipe,
     ResetPasswordComponent,
-    ForgotPasswordComponent,
-    DashboardComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     AppRoutingModule,
