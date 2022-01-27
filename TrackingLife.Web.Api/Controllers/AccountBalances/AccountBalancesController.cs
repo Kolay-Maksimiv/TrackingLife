@@ -65,7 +65,8 @@ namespace TrackingLife.Web.Api.Controllers.AccountBalances
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetAccountBalances(int id)
         {
-            id = 9;
+            id = 1;
+
             var user = await _userService.GetByProfileIdAsync(id);
             var profile = _profileService.GetProfileByUserId(user.Id);
 

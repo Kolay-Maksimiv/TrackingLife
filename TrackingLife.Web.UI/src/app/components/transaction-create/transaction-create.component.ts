@@ -25,7 +25,6 @@ export class TransactionCreateComponent implements OnInit {
     private toastService: ToastService,
     private transactionsService: TransactionsService) {
     this.user = new CreateTransactionModel();
-    this.user.status = AnalyticsPeriod.Income;
   }
 
   ngOnInit() { }
@@ -35,9 +34,10 @@ export class TransactionCreateComponent implements OnInit {
   }
 
   saveButton() {
-    debugger
     this.showLoader = true;
-    this.user.balanceId = 10;
+
+    this.user.balanceId = 1;
+
     this.transactionsService.createTransactions(this.user).subscribe(respData => {
           this.toastService.showSuccess("Transaction was created successfully");
           this.router.navigate(['/balance']);

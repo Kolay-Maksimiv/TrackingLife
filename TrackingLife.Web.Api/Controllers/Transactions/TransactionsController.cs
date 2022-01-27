@@ -12,7 +12,6 @@ using TrackingLife.Data.SearchFilters;
 using TrackingLife.Services.Services.AccountBalances;
 using TrackingLife.Services.Services.Profiles;
 using TrackingLife.Services.Services.Transactions;
-using TrackingLife.Services.StaticData;
 using TrackingLife.Web.Api.Controllers.Abstract;
 using TrackingLife.Web.Api.ViewModels;
 using TrackingLife.Web.Api.ViewModels.Abstract;
@@ -22,7 +21,6 @@ namespace TrackingLife.Web.Api.Controllers.Transactions
     /// <summary>
     /// Transactions API Controller
     /// </summary>
-    //[Authorize(AuthenticationSchemes = IdentityServerAuthenticationDefaults.AuthenticationScheme, Roles = "System Admin")]
     [Route("api/[controller]")]
     public class TransactionsController : BaseController
     {
@@ -79,6 +77,11 @@ namespace TrackingLife.Web.Api.Controllers.Transactions
         [ProducesResponseType(404)]
         public async Task<IActionResult> AddTransactionAsync([FromBody] TransactionViewModel model)
         {
+            if (model.Status == null)
+            {
+                model.Status = TransactionType.Costs;
+            }
+
             var transaction = new Transaction()
             {
                 UniqueTransaction = Guid.NewGuid(),
@@ -100,7 +103,7 @@ namespace TrackingLife.Web.Api.Controllers.Transactions
 
             currentBalance.LastTransactionDateTime = transaction.LastTransactionDateTime;
 
-             _accountBalancesService.UpdateAccountBalance(currentBalance);
+            _accountBalancesService.UpdateAccountBalance(currentBalance);
 
             var transactionId = _transactionService.AddTransaction(transaction);
 

@@ -60,7 +60,7 @@ export class AuthService {
     return this.http.post(HttpClientService.REGISTRATION_CONTROLLER, jsonData, { headers: this.myHeaders })
       .pipe(tap(resData => {
 
-        this.router.navigate(['/users']);
+        this.router.navigate(['/login']);
         //var loginModel = new LoginModel(resData.email, resData.password);
         //this.login(loginModel);
       }));

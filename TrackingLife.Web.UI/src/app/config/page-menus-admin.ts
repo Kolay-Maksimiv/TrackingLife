@@ -1,7 +1,7 @@
 let pageMenusAdmin = [
   {
     'icon': '../../../assets/img/svg/dashboard.svg',
-    'title': 'Dashboard',
+    'title': 'Balance',
     'url': '/'
   }
 ];

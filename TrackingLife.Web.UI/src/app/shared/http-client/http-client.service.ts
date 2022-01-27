@@ -18,7 +18,7 @@ export class HttpClientService {
   public static readonly FORGOTPASSWORD_CONTROLLER = HttpClientService.API + '/Accounts/forgot-password';
   public static readonly RESETPASS_CONTROLLER = HttpClientService.API + '/Accounts/reset-password';
   public static readonly UPDATEPASS_CONTROLLER = HttpClientService.API + '/Accounts/password';
-  public static readonly REGISTRATION_CONTROLLER = HttpClientService.API + '/Accounts/registration';
+  public static readonly REGISTRATION_CONTROLLER = HttpClientService.API + '/Accounts';
   public static readonly CREATEUSER_CONTROLLER = HttpClientService.API + '/Accounts/create';
 
   // Categories Controller
